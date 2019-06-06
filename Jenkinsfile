@@ -23,10 +23,17 @@ pipeline {
         }
       }
     }
+    stage('Test') {
+      steps {
+        dir("${APP_NAME}") {
+            sh 'gradle test  --no-daemon'
+        }
+      }
+    }
     stage('Build') {
       steps {
         dir("${APP_NAME}") {
-            sh 'gradle build --no-daemon'
+          sh 'gradle build -x test --no-daemon'
         }
       }
     }

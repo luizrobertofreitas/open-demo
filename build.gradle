@@ -1,21 +1,40 @@
 plugins {
 	id 'org.springframework.boot' version '2.1.5.RELEASE'
 	id 'java'
+	id 'maven'
 	id "org.sonarqube" version "2.7.1"
 }
 
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.accurate'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	maven {
+		url "http://localhost:8300/repository/maven-public"
+	}
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "$nexusMavenReleasesUrl") {
+				println "Uploading to $nexusMavenReleasesUrl ($project-$version)"
+				authentication(userName: "$nexusUsername", password: "$nexusPassword")
+			}
+			snapshotRepository(url: "$nexusMavenSnapshotsUrl") {
+				println "Uploading to $nexusMavenSnapshotsUrl ($project-$version)"
+				authentication(userName: "$nexusUsername", password: "$nexusPassword")
+			}
+		}
+	}
 }

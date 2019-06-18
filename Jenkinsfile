@@ -9,14 +9,6 @@ pipeline {
   }
 
   stages {
-     stage('Check out') {
-      steps {
-        script {
-          echo "Checking out https://github.com/luizrobertofreitas/open-demo.git"
-          git url: 'https://github.com/luizrobertofreitas/open-demo.git'
-        }
-      }
-    }
     stage('Build') {
       steps {
         sh 'gradle clean build -x test --no-daemon'

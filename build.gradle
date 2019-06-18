@@ -8,11 +8,10 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.accurate'
-version = '0.0.2-SNAPSHOT'
+version = '1.0.2'
 sourceCompatibility = '1.8'
 
 repositories {
-	mavenCentral()
 	maven {
 		url "$nexusMavenPublicUrl"
 	}

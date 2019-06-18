@@ -14,13 +14,14 @@ sourceCompatibility = '1.8'
 repositories {
 	mavenCentral()
 	maven {
-		url "http://localhost:8300/repository/maven-public"
+		url "$nexusMavenPublicUrl"
 	}
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation('br.com.fourward:fourward-authenticator-dto:1.0.9')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
